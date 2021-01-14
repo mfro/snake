@@ -85,10 +85,10 @@ export function snake(canvas: HTMLCanvasElement, score: Ref<number>) {
   game.food = new_food(rules, game);
   let dead = false;
 
-  onKeyDown(UP_ARROW, () => game.input_queue.push(UP));
-  onKeyDown(DOWN_ARROW, () => game.input_queue.push(DOWN));
-  onKeyDown(LEFT_ARROW, () => game.input_queue.push(LEFT));
-  onKeyDown(RIGHT_ARROW, () => game.input_queue.push(RIGHT));
+  onKeyDown(UP_ARROW, () => { game.input_queue.push(UP); console.log('UP'); });
+  onKeyDown(DOWN_ARROW, () => { game.input_queue.push(DOWN); console.log('DOWN'); });
+  onKeyDown(LEFT_ARROW, () => { game.input_queue.push(LEFT); console.log('LEFT'); });
+  onKeyDown(RIGHT_ARROW, () => { game.input_queue.push(RIGHT); console.log('RIGHT'); });
   onKeyDown(R, () => {
     dead = false;
     game = new_game(rules);
@@ -102,10 +102,12 @@ export function snake(canvas: HTMLCanvasElement, score: Ref<number>) {
 
     while (game.input_queue.length > 0) {
       let next = game.input_queue.shift()!;
-      if (next == game.facing || next.id == -game.facing.id)
+      if (next == game.facing || next.id == -game.facing.id) {
         continue;
+      }
 
       dir = next;
+      break;
     }
 
     game.facing = dir;
