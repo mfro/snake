@@ -150,9 +150,8 @@ export function snake(canvas: HTMLCanvasElement, score: Ref<number>) {
     previous = time;
 
     if (!dead) {
-      if (game.step_delay > delta) {
-        game.step_delay -= delta;
-      } else {
+      game.step_delay -= delta;
+      if (game.step_delay < 0) {
         game.step_delay += 1000 / 30;
         dead = update();
       }
